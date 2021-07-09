@@ -49,7 +49,7 @@ def colorFillter(color):
     return fillterdID
 
 def notify(id, color, url):
-    slack = slackweb.Slack(url=os.environ.get(SLACK_API))
+    slack = slackweb.Slack(url=${{env.SLACK_API}})
     attachments = [{"title": str(id) + " (" + str(color) + ")" ,
                 "text": url,
                 "color": "good", #good, warning, danger
