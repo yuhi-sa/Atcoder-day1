@@ -24,7 +24,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: notify
-      env:
+      with:
         SLACK_API: ${{ secrets.SLACK_API }}
       run: |
         bash start.bash  "$SLACK_API"
