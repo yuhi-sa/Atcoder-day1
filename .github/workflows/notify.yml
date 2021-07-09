@@ -9,8 +9,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      SLACK_API: ${{ secrets.SLACK_API }}
 
     steps:
     - uses: actions/checkout@v2
@@ -26,5 +24,7 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
     - name: notify
+      env:
+        SLACK_API: ${{ secrets.SLACK_API }}
       run: |
         bash start.bash
