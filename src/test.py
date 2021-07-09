@@ -56,8 +56,8 @@ def colorFillter(color):
     return fillterdID
 
 def notify(id, color, url):
-    slack = slackweb.Slack(url="")
-    attachments = [{"title": "本日の問題：" + str(id) + " (" + str(color) + ")" ,
+    slack = slackweb.Slack(url={{SLACK_API}})
+    attachments = [{"title": str(id) + " (" + str(color) + ")" ,
                 "text": url,
                 "color": "good", #good, warning, danger
                 "footer": "Send from Python",
