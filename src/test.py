@@ -28,7 +28,8 @@ def colorFillter(color):
     response = requests.get(api_path)
     Data = response.json()
 
-    colorCollection  = {"gray_l": (-10000, 0),
+    colorCollection  = {
+            "gray_l": (-10000, 0),
              "gray_h": (0, 400), 
              "brown": (400, 800), 
              "green": (800, 1200),
@@ -61,11 +62,11 @@ def notify(id, color, url):
 
 def main():
     # ユーザー名
-    f = open('../users.txt', 'r') 
+    f = open('users.txt', 'r') 
     user = f.read()
     f.close()
     # 色
-    f = open('../color.txt', 'r') 
+    f = open('color.txt', 'r') 
     color = f.read()
     f.close()
     # 全員が解いていない指定色

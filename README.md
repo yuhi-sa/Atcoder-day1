@@ -3,10 +3,10 @@
 
 # 使い方
 ## ユーザーの追加
-users.txtにユーザー名を追加する．
+[src/users.txt](https://github.com/yuhi-sa/Atcoder-day1/blob/main/src/users.txt)にユーザー名を追加する．
 
 ## 問題の難易度指定
-color.txtに以下のkeyで指定．
+[src/color.txt](https://github.com/yuhi-sa/Atcoder-day1/blob/main/src/color.txt)に以下のkeyで指定．
 
 ```python
 # "key": レート の形で表記
