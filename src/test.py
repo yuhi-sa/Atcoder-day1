@@ -1,7 +1,8 @@
 import requests
+import slackweb
 import json
 import random
-import slackweb
+import os
 
 # 提出結果の取得
 def getSubmissionData(userID):
@@ -48,7 +49,7 @@ def colorFillter(color):
     return fillterdID
 
 def notify(id, color, url):
-    slack = slackweb.Slack(url={{SLACK_API}})
+    slack = slackweb.Slack(url=os.environ.get(SLACK_API))
     attachments = [{"title": str(id) + " (" + str(color) + ")" ,
                 "text": url,
                 "color": "good", #good, warning, danger
