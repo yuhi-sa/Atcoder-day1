@@ -57,7 +57,7 @@ def colorFillter(color):
 
 def notify(id, color, url):
     slack = slackweb.Slack(url="")
-    attachments = [{"title": "本日の問題：" + str(id) + "(" + str(color) + ")" ,
+    attachments = [{"title": "本日の問題：" + str(id) + " (" + str(color) + ")" ,
                 "text": url,
                 "color": "good", #good, warning, danger
                 "footer": "Send from Python",
