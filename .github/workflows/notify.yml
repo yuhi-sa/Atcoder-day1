@@ -27,4 +27,4 @@ jobs:
       env:
         SLACK_API: ${{ secrets.SLACK_API }}
       run: |
-        bash start.bash
+        bash start.bash  "$SLACK_API"
