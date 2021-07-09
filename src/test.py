@@ -3,14 +3,6 @@ import json
 import random
 import slackweb
 
-"""""""""""""""""""""""""""""
-Atcoder API
-https://github.com/kenkoooo/AtCoderProblems/blob/master/doc/api.md
-
-slack API
-https://slack.com/intl/ja-jp/help/articles/115005265063-Slack-での-Incoming-Webhook-の利用
-"""""""""""""""""""""""""""""
-
 # 提出結果の取得
 def getSubmissionData(userID):
     api_path = "https://kenkoooo.com/atcoder/atcoder-api/results?user="
@@ -82,8 +74,8 @@ def main():
     id = random.choice(list(unAns))
     url = "https://atcoder.jp/contests/" + str(id[0:-2]) + "/tasks/" + str(id)
 
-    print(id, url)
-    # notify(id, color, url)
+    # print(id, url)
+    notify(id, color, url)
 
 if __name__ == '__main__':
     main()
