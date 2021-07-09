@@ -9,13 +9,14 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
       with:
         python-version: 3.9
+        SLACK_API: ${{ secrets.SLACK_API }}
 
     - name: Install dependencies
       run: |
@@ -26,5 +27,3 @@ jobs:
     - name: notify
       run: |
           bash start.bash  "$SLACK_API"
-      with:
-        SLACK_API: ${{ secrets.SLACK_API }}
