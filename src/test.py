@@ -104,8 +104,8 @@ def notify(id, color, url):
                                 {
                                     "type": "plain_text",
                                     "text": str(iro)
-				}
-                    ]
+				                }
+                            ]
                 },
                 {
                     "type": "actions",
