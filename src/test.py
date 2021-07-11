@@ -9,8 +9,8 @@ def getSubmissionData(userID):
     api_path = "https://kenkoooo.com/atcoder/atcoder-api/results?user="
     api_url = api_path + userID
     response = requests.get(api_url)
-    jsonData = response.json()
-    return jsonData
+    Data = response.json()
+    return Data
 
 # 全員がAcceptの問題を取得
 def collectAcceptedID(user):
@@ -18,7 +18,7 @@ def collectAcceptedID(user):
     for userID in user:
         Data = getSubmissionData(userID)
         for data in Data:
-            if data["result"] != "AC":
+            if data["result"] == "AC":
                 AcceptID.add(data["problem_id"])
     return AcceptID
 
@@ -69,15 +69,20 @@ def main():
     f = open('color.txt', 'r') 
     color = f.read()
     f.close()
-    # 全員が解いていない指定色
+
+    
+    # だれか一人がACした問題の集合
     AcceptID = collectAcceptedID(user)
+    # 指定色の問題の集合
     fillterdID = colorFillter(color)
+    # 差集合
     unAns = fillterdID - AcceptID
 
     id = random.choice(list(unAns))
     url = "https://atcoder.jp/contests/" + str(id[0:-2]) + "/tasks/" + str(id)
 
     # print(id, url)
+    # slackに通知
     notify(id, color, url)
 
 if __name__ == '__main__':
