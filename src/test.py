@@ -65,12 +65,14 @@ def main():
     f = open('users.txt', 'r') 
     user = f.read()
     f.close()
+    user = user.split(',')
+
     # 色
     f = open('color.txt', 'r') 
     color = f.read()
     f.close()
 
-    
+
     # だれか一人がACした問題の集合
     AcceptID = collectAcceptedID(user)
     # 指定色の問題の集合
