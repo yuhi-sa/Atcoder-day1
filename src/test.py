@@ -164,9 +164,8 @@ def main():
 
     url = "https://atcoder.jp/contests/" + str(id[0:-2]) + "/tasks/" + str(id)
 
-    print(id, url)
     # slackに通知
-    # notify(id, color, url)
+    notify(id, color, url)
 
 if __name__ == '__main__':
     main()
