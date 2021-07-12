@@ -50,6 +50,18 @@ def colorFillter(color):
     
     return fillterdID
 
+# 問題の詳細を取得
+def getProblemTitle(id):
+    api_path = "https://kenkoooo.com/atcoder/resources/merged-problems.json"
+    response = requests.get(api_path)
+    Data = response.json()
+    for data in Data:
+        if data["id"]== id:
+            title = data["title"]
+            break
+    return title
+
+
 # slack通知
 def notify(id, color, url):
     slack_api = os.environ['SLACK_API']
@@ -74,6 +86,9 @@ def notify(id, color, url):
         iro = "橙色"
     elif color == "red":
         iro = "赤色"
+
+    # titleを取得
+    title = getProblemTitle(id)
     
     # 内容
     attachments = [
@@ -83,7 +98,7 @@ def notify(id, color, url):
                     "type": "header",
                     "text": {
                         "type": "plain_text",
-                        "text": str(id[0:-2]) + "の" + str(id[-1]) + "問題",
+                        "text": str(id[0:-2]) + "：" + str(title),
                     }
                 },
                 {
