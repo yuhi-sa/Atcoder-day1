@@ -98,7 +98,7 @@ def notify(id, color, url):
                     "type": "header",
                     "text": {
                         "type": "plain_text",
-                        "text": str(id[0:-2]) + "：" + str(title),
+                        "text": str.upper(id[0:-2]) + "：" + str(title),
                     }
                 },
                 {
@@ -164,7 +164,7 @@ def main():
     f.close()
 
 
-    # だれか一人がACした問題の集合
+    # だれか一人でもACした問題の集合
     AcceptID = collectAcceptedID(user)
     # 指定色の問題の集合
     fillterdID = colorFillter(color)

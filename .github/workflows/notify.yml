@@ -2,7 +2,7 @@ name: notify problem
 
 on:
   schedule:
-    - cron: '01 0 * * 1,2,3,4,5'
+    - cron: '30 0 * * 1,2,3,4,5'
   workflow_dispatch:
 
 jobs:
