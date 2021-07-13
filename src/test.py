@@ -5,7 +5,6 @@ import random
 import os
 import datetime
 
-# 提出結果の取得
 def getSubmissionData(userID):
     api_path = "https://kenkoooo.com/atcoder/atcoder-api/results?user="
     api_url = api_path + userID
@@ -13,7 +12,6 @@ def getSubmissionData(userID):
     Data = response.json()
     return Data
 
-# 全員がAcceptの問題を取得
 def collectAcceptedID(user):
     AcceptID = set()
     for userID in user:
@@ -23,7 +21,6 @@ def collectAcceptedID(user):
                 AcceptID.add(data["problem_id"])
     return AcceptID
 
-# 指定した色の問題を取得
 def colorFillter(Color):
     api_path = "https://kenkoooo.com/atcoder/resources/problem-models.json"
     response = requests.get(api_path)
@@ -51,14 +48,12 @@ def colorFillter(Color):
                     fillterdID.add(data)
     return fillterdID
 
-# 色を確認
 def getDifficulty(id):
     api_path = "https://kenkoooo.com/atcoder/resources/problem-models.json"
     response = requests.get(api_path)
     Data = response.json()
     return Data[id]["difficulty"]
 
-# 問題の詳細を取得
 def getProblemTitle(id):
     api_path = "https://kenkoooo.com/atcoder/resources/merged-problems.json"
     response = requests.get(api_path)
@@ -69,13 +64,10 @@ def getProblemTitle(id):
             break
     return title
 
-# slack通知
 def notify(id, difficulty, url):
     slack_api = os.environ['SLACK_API']
     slack = slackweb.Slack(url=slack_api)    
-    # titleを取得
     title = getProblemTitle(id)   
-    # 内容
     attachments = [
         {
             "blocks": [
@@ -131,7 +123,6 @@ def notify(id, difficulty, url):
                 }
 	        ]
         }
-
     ]
     slack.notify(text=None, attachments=attachments)
 
@@ -147,13 +138,11 @@ def errorNotify(message):
     slack.notify(text=None, attachments=attachments)
 
 def main():
-    # ユーザー名
     f = open('users.txt', 'r') 
     user = f.read()
     f.close()
     user = user.split(',')
 
-    # 色
     f = open('color.txt', 'r') 
     color = f.read()
     f.close()
@@ -178,10 +167,7 @@ def main():
         if res.status_code == 200:
             break
 
-    # difficultyを取得
     difficulty = getDifficulty(id)
-
-    # slackに通知
     notify(id, difficulty, url)
 
 if __name__ == '__main__':
