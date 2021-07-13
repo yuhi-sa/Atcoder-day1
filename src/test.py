@@ -159,12 +159,9 @@ def main():
     f.close()
     color = color.split(',')
 
-    # だれか一人でもACした問題の集合
-    AcceptID = collectAcceptedID(user)
-    # 指定色の問題の集合
+    AcceptID   = collectAcceptedID(user)
     fillterdID = colorFillter(color)
-    # 差集合
-    unAns = list(fillterdID - AcceptID)
+    unAns      = list(fillterdID - AcceptID)
 
     while(True):
         if len(unAns) == 0:
@@ -178,11 +175,11 @@ def main():
         if res.status_code == 200:
             break
 
-    # difficultyを取得
     difficulty = getDifficulty(id)
-
-    # slackに通知
     notify(id, difficulty, url)
+
+    with open("yesterday.txt", mode="w") as f:
+        f.write(str(id))
 
 if __name__ == '__main__':
     main()

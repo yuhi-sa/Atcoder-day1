@@ -25,6 +25,7 @@ jobs:
 
     - name: notify
       run: |
-          bash start.bash  "$SLACK_API"
+          bash start.bash  "$SLACK_API" , "$SLACK_API2"
       env:
           SLACK_API: ${{ secrets.SLACK_API }}
+          SLACK_API2: ${{ secrets.SLACK_API2 }}
