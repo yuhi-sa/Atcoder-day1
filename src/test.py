@@ -24,7 +24,7 @@ def collectAcceptedID(user):
     return AcceptID
 
 # 指定した色の問題を取得
-def colorFillter(color):
+def colorFillter(Color):
     api_path = "https://kenkoooo.com/atcoder/resources/problem-models.json"
     response = requests.get(api_path)
     Data = response.json()
@@ -43,13 +43,20 @@ def colorFillter(color):
 
     fillterdID = set()
 
-    for data in Data:
-        if "difficulty"in Data[data]:
-            difficulty = Data[data]["difficulty"]
-            if colorCollection[color][0] <= difficulty and colorCollection[color][1] > difficulty:
-                fillterdID.add(data)
-    
+    for color in Color:
+        for data in Data:
+            if "difficulty"in Data[data]:
+                difficulty = Data[data]["difficulty"]
+                if colorCollection[color][0] <= difficulty and colorCollection[color][1] > difficulty:
+                    fillterdID.add(data)
     return fillterdID
+
+# 色を確認
+def getDifficulty(id):
+    api_path = "https://kenkoooo.com/atcoder/resources/problem-models.json"
+    response = requests.get(api_path)
+    Data = response.json()
+    return Data[id]["difficulty"]
 
 # 問題の詳細を取得
 def getProblemTitle(id):
@@ -62,37 +69,12 @@ def getProblemTitle(id):
             break
     return title
 
-
 # slack通知
-def notify(id, color, url):
+def notify(id, difficulty, url):
     slack_api = os.environ['SLACK_API']
-    slack = slackweb.Slack(url=slack_api)
-    
-    # 色を和名にする
-    if color =="gray_l":
-        iro = "灰色_low"
-    elif color == "gray_h":
-        iro = "灰色_high"
-    elif color == "brown_l":
-        iro = "茶色_low"
-    elif color == "brown_h":
-        iro = "茶色_high"
-    elif color == "green":
-        iro = "緑色"
-    elif color == "skyblue":
-        iro = "水色"
-    elif color == "blue":
-        iro = "青色"
-    elif color == "yellow": 
-        iro = "黄色"
-    elif color == "orange": 
-        iro = "橙色"
-    elif color == "red":
-        iro = "赤色"
-
+    slack = slackweb.Slack(url=slack_api)    
     # titleを取得
-    title = getProblemTitle(id)
-    
+    title = getProblemTitle(id)   
     # 内容
     attachments = [
         {
@@ -121,7 +103,7 @@ def notify(id, color, url):
                                 },
                                 {
                                     "type": "plain_text",
-                                    "text": str(iro)
+                                    "text": str(difficulty)
 				                }
                             ]
                 },
@@ -156,8 +138,6 @@ def notify(id, color, url):
 def errorNotify(message):
     slack_api = os.environ['SLACK_API']
     slack = slackweb.Slack(url=slack_api)
-    
-    # 内容
     attachments = [
         {"title": "エラー発生",
                 "text": message,
@@ -177,25 +157,32 @@ def main():
     f = open('color.txt', 'r') 
     color = f.read()
     f.close()
-
+    color = color.split(',')
 
     # だれか一人でもACした問題の集合
     AcceptID = collectAcceptedID(user)
     # 指定色の問題の集合
     fillterdID = colorFillter(color)
     # 差集合
-    unAns = fillterdID - AcceptID
+    unAns = list(fillterdID - AcceptID)
 
-    if len(unAns) == 0:
-        errorNotify("誰も解いていない問題がありません．設定を変更してください．")
-        return
+    while(True):
+        if len(unAns) == 0:
+            errorNotify("誰も解いていない問題がありません．設定を変更してください．")
+            return
 
-    id = random.choice(list(unAns))
+        id = unAns.pop(random.choice(range(len(unAns))))
+        url = "https://atcoder.jp/contests/" + str(id[0:-2]) + "/tasks/" + str(id)
+        res = requests.get(url)
 
-    url = "https://atcoder.jp/contests/" + str(id[0:-2]) + "/tasks/" + str(id)
+        if res.status_code == 200:
+            break
+
+    # difficultyを取得
+    difficulty = getDifficulty(id)
 
     # slackに通知
-    notify(id, color, url)
+    notify(id, difficulty, url)
 
 if __name__ == '__main__':
     main()
