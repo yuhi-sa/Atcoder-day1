@@ -150,6 +150,18 @@ def notify(id, color, url):
     ]
     slack.notify(text=None, attachments=attachments)
 
+def errorNotify(message):
+    slack_api = os.environ['SLACK_API']
+    slack = slackweb.Slack(url=slack_api)
+    
+    # 内容
+    attachments = [
+        {"title": "エラー発生",
+                "text": message,
+                "color": "danger"
+        }
+    ]
+    slack.notify(text=None, attachments=attachments)
 
 def main():
     # ユーザー名
@@ -170,6 +182,9 @@ def main():
     fillterdID = colorFillter(color)
     # 差集合
     unAns = fillterdID - AcceptID
+
+    if len(unAns) == 0:
+        errorNotify("誰も解いていない問題がありません")
 
     # ABCかARCの問題
     while(True):
