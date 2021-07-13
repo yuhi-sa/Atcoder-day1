@@ -187,14 +187,10 @@ def main():
     unAns = fillterdID - AcceptID
 
     if len(unAns) == 0:
-        errorNotify("誰も解いていない問題がありません")
+        errorNotify("誰も解いていない問題がありません．設定を変更してください．")
         return
-    
-    # ABCかARCの問題
-    while(True):
-        id = random.choice(list(unAns))
-        if "abc"in id or  "arc" in id:
-            break
+
+    id = random.choice(list(unAns))
 
     url = "https://atcoder.jp/contests/" + str(id[0:-2]) + "/tasks/" + str(id)
 
