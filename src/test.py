@@ -148,20 +148,23 @@ def errorNotify(message):
 
 def main():
     # ユーザー名
-    f = open('src/users.txt', 'r') 
+    f = open('users.txt', 'r') 
     user = f.read()
     f.close()
     user = user.split(',')
 
     # 色
-    f = open('src/color.txt', 'r') 
+    f = open('color.txt', 'r') 
     color = f.read()
     f.close()
     color = color.split(',')
 
-    AcceptID   = collectAcceptedID(user)
+    # だれか一人でもACした問題の集合
+    AcceptID = collectAcceptedID(user)
+    # 指定色の問題の集合
     fillterdID = colorFillter(color)
-    unAns      = list(fillterdID - AcceptID)
+    # 差集合
+    unAns = list(fillterdID - AcceptID)
 
     while(True):
         if len(unAns) == 0:
@@ -175,12 +178,11 @@ def main():
         if res.status_code == 200:
             break
 
+    # difficultyを取得
     difficulty = getDifficulty(id)
-    notify(id, difficulty, url)
 
-    f = open("src/yesterday.txt", mode="w")
-    f.write(str(id))
-    f.close()
+    # slackに通知
+    notify(id, difficulty, url)
 
 if __name__ == '__main__':
     main()
