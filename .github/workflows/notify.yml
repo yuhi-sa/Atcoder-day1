@@ -42,7 +42,7 @@ jobs:
       run: |
           python src/test.py "$SLACK_API"
       env:
-          SLACK_API2: ${{ secrets.SLACK_API }}
+          SLACK_API: ${{ secrets.SLACK_API }}
     
     - name: Save today priblem
       run: |
