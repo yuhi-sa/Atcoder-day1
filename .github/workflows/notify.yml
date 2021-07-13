@@ -29,3 +29,11 @@ jobs:
       env:
           SLACK_API: ${{ secrets.SLACK_API }}
           SLACK_API2: ${{ secrets.SLACK_API2 }}
+    
+    - name: Update yesterday text
+      run: |
+        git config user.name "<git-user-name>"
+        git config user.email "<git-user-e-mail>"
+        git add *
+        git commit -m "Update"
+        git push origin master
