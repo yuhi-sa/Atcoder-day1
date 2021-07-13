@@ -178,8 +178,9 @@ def main():
     difficulty = getDifficulty(id)
     notify(id, difficulty, url)
 
-    with open("yesterday.txt", mode="w") as f:
-        f.write(str(id))
+    f = open("yesterday.txt", mode="w")
+    f.write(str(id))
+    f.close()
 
 if __name__ == '__main__':
     main()
