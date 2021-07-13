@@ -38,12 +38,12 @@ def Notify(message):
 
 def main():
 # 昨日の問題
-    f = open("yesterday.txt", 'r') 
+    f = open("src/yesterday.txt", 'r') 
     old_id = f.read()
     f.close()
 
     # ユーザー名
-    f = open('users.txt', 'r') 
+    f = open('src/users.txt', 'r') 
     user = f.read()
     f.close()
     user = user.split(',')

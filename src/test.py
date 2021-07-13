@@ -148,13 +148,13 @@ def errorNotify(message):
 
 def main():
     # ユーザー名
-    f = open('users.txt', 'r') 
+    f = open('src/users.txt', 'r') 
     user = f.read()
     f.close()
     user = user.split(',')
 
     # 色
-    f = open('color.txt', 'r') 
+    f = open('src/color.txt', 'r') 
     color = f.read()
     f.close()
     color = color.split(',')
@@ -178,7 +178,7 @@ def main():
     difficulty = getDifficulty(id)
     notify(id, difficulty, url)
 
-    f = open("yesterday.txt", mode="w")
+    f = open("src/yesterday.txt", mode="w")
     f.write(str(id))
     f.close()
 
