@@ -32,7 +32,8 @@ def colorFillter(color):
     colorCollection  = {
             "gray_l": (-10000, 0),
              "gray_h": (0, 400), 
-             "brown": (400, 800), 
+             "brown_l": (400, 600), 
+             "brown_h": (600, 800),
              "green": (800, 1200),
              "skyblue": (1200, 1600), 
              "blue": (1600, 2000), 
@@ -69,11 +70,13 @@ def notify(id, color, url):
     
     # 色を和名にする
     if color =="gray_l":
-        iro = "灰色"
+        iro = "灰色_low"
     elif color == "gray_h":
-        iro = "灰色"
-    elif color == "brown":
-        iro = "茶色"
+        iro = "灰色_high"
+    elif color == "brown_l":
+        iro = "茶色_low"
+    elif color == "brown_h":
+        iro = "茶色_high"
     elif color == "green":
         iro = "緑色"
     elif color == "skyblue":
@@ -185,12 +188,13 @@ def main():
 
     if len(unAns) == 0:
         errorNotify("誰も解いていない問題がありません")
-
+        return
+    
     # ABCかARCの問題
     while(True):
         id = random.choice(list(unAns))
         if "abc"in id or  "arc" in id:
-            break 
+            break
 
     url = "https://atcoder.jp/contests/" + str(id[0:-2]) + "/tasks/" + str(id)
 
