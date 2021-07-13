@@ -1,5 +1,6 @@
 # Atcoder-day1
-一日一題毎朝(土日を除く)に全員が解いたことのないAtcoderの問題をSlackのチャンネルに送る．
+一日一題毎朝(土日を除く)に全員が解いたことのないAtcoderの問題をSlackのチャンネルに送る．  
+<img width="738" alt="スクリーンショット 2021-07-13 14 13 44" src="https://user-images.githubusercontent.com/62089243/125394390-94987480-e3e4-11eb-9179-3d080903b566.png">
 
 # 使い方
 ## ユーザーの追加
