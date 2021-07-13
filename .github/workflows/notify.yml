@@ -23,14 +23,28 @@ jobs:
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-    - name: notify
+    - name: Notify yesterday reward
       run: |
-          bash start.bash  "$SLACK_API" , "$SLACK_API2"
+          python src/reward.py "$SLACK_API2"
       env:
-          SLACK_API: ${{ secrets.SLACK_API }}
           SLACK_API2: ${{ secrets.SLACK_API2 }}
     
-    - name: Update yesterday text
+    - name: Remove old data
+      run: |
+        rm src/yesterday.txt
+        git config user.name "<git-user-name>"
+        git config user.email "<git-user-e-mail>"
+        git add *
+        git commit -m "Update"
+        git push origin master
+
+    - name: Notify today problem
+      run: |
+          python src/test.py "$SLACK_API"
+      env:
+          SLACK_API2: ${{ secrets.SLACK_API }}
+    
+    - name: Save today priblem
       run: |
         git config user.name "<git-user-name>"
         git config user.email "<git-user-e-mail>"
