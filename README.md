@@ -1,13 +1,14 @@
 # Atcoder-day1
-一日一題毎朝(土日を除く)に全員が解いたことのないAtcoderの問題をSlackのチャンネルに送る．  
+一日一題毎朝(土日を除く)に全員が解いたことのないAtcoderの問題をSlackのチャンネルに送る． 
+ 
 <img width="738" alt="スクリーンショット 2021-07-13 14 13 44" src="https://user-images.githubusercontent.com/62089243/125394390-94987480-e3e4-11eb-9179-3d080903b566.png">
 
 # 使い方
 ## ユーザーの追加
-[src/users.txt](https://github.com/yuhi-sa/Atcoder-day1/blob/main/src/users.txt)にユーザー名を追加する．
+[src/users.txt](settings/users.txt)にユーザー名を追加する．
 
 ## 問題の難易度指定
-[src/color.txt](https://github.com/yuhi-sa/Atcoder-day1/blob/main/src/color.txt)に以下のkeyで指定．
+[src/color.txt](settings/color.txt)に以下のkeyで指定．
 
 | 色 | key | レート |
 | :--- | :---: | ---: |
