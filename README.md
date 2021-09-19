@@ -1,3 +1,7 @@
+![GitHub last commit](https://img.shields.io/github/last-commit/yuhi-sa/Atcoder-day1)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/yuhi-sa/Atcoder-day1)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/yuhi-sa/Atcoder-day1)
+![GitHub top language](https://img.shields.io/github/languages/top/yuhi-sa/Atcoder-day1)
 # Atcoder-day1
 一日一題毎朝(土日を除く)に全員が解いたことのないAtcoderの問題をSlackのチャンネルに送る． 
  
